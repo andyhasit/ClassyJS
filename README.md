@@ -6,7 +6,6 @@ ClassyJS provides two things which Javascript is sorely missing:
   1. A **class** construct.
   2. A decent **self** keyword.
 
---
 It provides just one function called **cls()** which creates a class:
 
     Person = cls({
@@ -37,13 +36,13 @@ Consider this example of normal Javascript:
         this.speak(arr[i]);
       }
       
-      //This breaks
+      //This breaks because this now points to something else
       $.each(arr, function(index, value) {
         this.speak(value);
       });
     }
 
-Of course we all know the work around:
+The most common work around to this problem is something like:
 
     Person.prototype.speakWords = function(arr) {    
       var that = this;
