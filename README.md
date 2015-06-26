@@ -119,3 +119,12 @@ Inheritance and overriding are easy and intuitive. This snippet shows the full f
 
 Just copy the source somewhere in your project, it's only 28 lines long!
 
+##What next
+
+Clearly this is just a 28 line rant at Javascript, not a full implementation of OOP. There are no provisions for private properties (I personally underscore anything I deem private), and there is perhaps a smart way to optain that holy grail of a true reference to self.
+
+The fact each method call goes through a wrapper call can be an inconvenience in debugging, perhaps causes a slight performance hit, and precludes you from manipulating those functions in advanced ways (including the constructor itself).
+
+Despite that, it is pleasantly usable.
+
+If you feel like making changes, fork away!
