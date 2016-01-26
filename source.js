@@ -7,7 +7,7 @@ function cls(definition) {
     return newArgs;
   }
   function Template() {
-    return definition.__constructor__.apply(this, modifyArgs(this, arguments));
+    return definition.__init__.apply(this, modifyArgs(this, arguments));
   }
   Template.prototype.toString = function() {
     return '<A ClassyJS object. Try setting a toString(me) function in the class definition.>';

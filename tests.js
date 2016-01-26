@@ -14,7 +14,7 @@ describe('ClassyJS', function() {
   
   it('objects are created with correct properties', function() {
     var Person = cls({
-      __constructor__: function(me, firstname, lastname, age) {
+      __init__: function(me, firstname, lastname, age) {
         me.firstname = firstname;
         me.lastname = lastname;
         me.age = age;
@@ -33,7 +33,7 @@ describe('ClassyJS', function() {
   
   it('method arguments are passed correctly.', function() {
     var Person = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       returnStuff: function(me, x, y, z) {
         return [x, y, z];
@@ -48,7 +48,7 @@ describe('ClassyJS', function() {
   
   it('subclass inherits methods, and parameters are passed correctly.', function() {
     var Person = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       returnStuff: function(me, x, y, z) {
         return [x, y, z];
@@ -56,7 +56,7 @@ describe('ClassyJS', function() {
     });
     
     var SpecialPerson = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       __inherits__: Person
     });
@@ -70,7 +70,7 @@ describe('ClassyJS', function() {
   
   it('subclass can access parent method directly', function() {
     var Parent = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       parentFoo: function(me, x, y) {
         return x + y;
@@ -78,7 +78,7 @@ describe('ClassyJS', function() {
     });
     
     var Child = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       __inherits__: Parent,
       childFoo: function(me, x, y) {
@@ -92,7 +92,7 @@ describe('ClassyJS', function() {
   
     it('parent method accessed directly refer to the correct me', function() {
     var Parent = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
         me.start = 100;
       },
       parentFoo: function(me, x, y) {
@@ -102,7 +102,7 @@ describe('ClassyJS', function() {
     });
     
     var Child = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
         me.start = 200;
       },
       __inherits__: Parent,
@@ -117,7 +117,7 @@ describe('ClassyJS', function() {
   
   it('subclass can access parent method via __super__', function() {
     var Parent = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       foo: function(me, x, y) {
         c.log('foo');
@@ -127,7 +127,7 @@ describe('ClassyJS', function() {
     
     var Child = cls({
       __inherits__: Parent,
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       bar: function(me, x, y) {
         return me.__super__.foo(me, x, y);
@@ -139,7 +139,7 @@ describe('ClassyJS', function() {
   
   it('method called via __super__ refers to correct me', function() {
     var Parent = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
         me.start = 100;
       },
       foo: function(me, x, y) {
@@ -150,7 +150,7 @@ describe('ClassyJS', function() {
     
     var Child = cls({
       __inherits__: Parent,
-      __constructor__: function(me) {
+      __init__: function(me) {
         me.start = 200;
       },
       bar: function(me, x, y) {
@@ -163,7 +163,7 @@ describe('ClassyJS', function() {
     
   it("subclass method override doesn't affect parent method", function() {
     var Parent = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       foo: function(me) {
         return 'parent stuff';
@@ -171,7 +171,7 @@ describe('ClassyJS', function() {
     });
     
     var Child = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       __inherits__: Parent,
       foo: function(me) {
@@ -187,7 +187,7 @@ describe('ClassyJS', function() {
   
   it('subclass can access parent constructor', function() {
     var Parent = cls({
-      __constructor__: function(me, name) {
+      __init__: function(me, name) {
         me.name = name;
         c.log('Called Parent with ' + name);
       },
@@ -198,7 +198,7 @@ describe('ClassyJS', function() {
     
     var Child = cls({
       __inherits__: Parent,
-      __constructor__: function(me, firstname, lastname) {
+      __init__: function(me, firstname, lastname) {
         me.firstname = firstname;
         me.lastname = lastname;
         me.__super__.__init__(me, firstname + ' ' + lastname);
@@ -211,7 +211,7 @@ describe('ClassyJS', function() {
   
   it('subclass can access overriden parent method.', function() {
     var Parent = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       foo: function(me) {
         return 'parent stuff';
@@ -219,7 +219,7 @@ describe('ClassyJS', function() {
     });
     
     var Child = cls({
-      __constructor__: function(me) {
+      __init__: function(me) {
       },
       __inherits__: Parent,
       foo: function(me) {
