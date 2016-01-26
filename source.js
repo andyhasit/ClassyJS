@@ -12,22 +12,28 @@ function cls(definition) {
   Template.prototype.toString = function() {
     return '<A ClassyJS object. Try setting a toString(me) function in the class definition.>';
   };
-  Template.prototype.__init__ = function() {
-    c.log('init');
-    c.log(this);
-    c.log(arguments[0]);
-    return definition.__constructor__.apply(this, modifyArgs(this, arguments));
-  };
   if (definition.hasOwnProperty('__inherits__')) {
     var parentDefinition = new definition.__inherits__;
     Template.prototype = parentDefinition;
-    //Template.prototype.__super__ = parentDefinition;
     var __super__ = {};
     for(prop in parentDefinition) {
-      __super__[prop] = parentDefinition[prop];
+      __super__[prop] = function() {
+        var me = arguments[0];
+        var args = [];
+        for (var i = 1, j = arguments.length; i < j; i++){
+          args.push(arguments[i]);
+        }
+        return parentDefinition[prop].apply(me, args);
+      }
     }
-    //c.log(__super__);
-    //__super__.constructor = parentDefinition.__init__;
+    __super__.__init__ = function(){
+      var me = arguments[0];
+      var args = [];
+      for (var i = 1, j = arguments.length; i < j; i++){
+        args.push(arguments[i]);
+      }
+      return parentDefinition.constructor.apply(me, args);
+    }
     Template.prototype.__super__ = __super__;
     /*
     Option 1:
