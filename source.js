@@ -19,10 +19,14 @@ function cls(definition) {
     for(prop in parentDefinition) {
       __super__[prop] = function() {
         var me = arguments[0];
+        //c.log(prop);
+        //c.log(''+ arguments[0]);
         var args = [];
         for (var i = 1, j = arguments.length; i < j; i++){
           args.push(arguments[i]);
         }
+        //c.log(args);
+        //FIX: this causes stackoverflow when child has same name as parent
         return parentDefinition[prop].apply(me, args);
       }
     }
@@ -35,33 +39,13 @@ function cls(definition) {
       return parentDefinition.constructor.apply(me, args);
     }
     Template.prototype.__super__ = __super__;
-    /*
-    Option 1:
-      allows me to call me.__super__.constructor()
-      calling me.__super.foo() will fail if foo is defined on parent as well as overriden.
-    
-    
-    Template.prototype.__super__ = {
-      //constructor: function(){ parentDefinition.apply(this)}
-      __init__: function(){
-          c.log(this);
-          parentDefinition.constructor.apply(this, modifyArgs(it, arguments))
-      }
-    };
-    for(prop in parentDefinition) {
-      //c.log(prop);
-      Template.prototype.__super__[prop] = prop;
-    }
-    */
   }
   for (var property in definition) {
     if ((definition.hasOwnProperty(property)) && !(/^__.*__/.exec(property))) {
       var fn = definition[property];
-      Template.prototype[property] = (function (fn) { 
-        return function() {
-          return fn.apply(this, modifyArgs(this, arguments));
-        }
-      })(fn);
+      Template.prototype[property] = function () {
+        return fn.apply(this, modifyArgs(this, arguments));
+      };
     }
   }
   return Template;

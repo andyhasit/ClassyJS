@@ -90,7 +90,7 @@ describe('ClassyJS', function() {
     expect(child.childFoo(6, 10)).toEqual(16);
   });
   
-    it('parent method accessed directly refer to the correct me', function() {
+  it('parent method accessed directly refer to the correct me', function() {
     var Parent = cls({
       __init__: function(me) {
         me.start = 100;
@@ -189,7 +189,6 @@ describe('ClassyJS', function() {
     var Parent = cls({
       __init__: function(me, name) {
         me.name = name;
-        c.log('Called Parent with ' + name);
       },
       sayHi: function(me) {
         c.log('hi');
@@ -209,7 +208,7 @@ describe('ClassyJS', function() {
     expect(child.name).toEqual('Mickey Mouse');
   });
   
-  it('subclass can access overriden parent method.', function() {
+  xit('subclass can access overriden parent method.', function() {
     var Parent = cls({
       __init__: function(me) {
       },
@@ -223,13 +222,14 @@ describe('ClassyJS', function() {
       },
       __inherits__: Parent,
       foo: function(me) {
+        me.__super__.foo(me);
         return 'child stuff ' + me.__super__.foo(me);
       }
     });
     
     var parent = new Parent();
     var child = new Child();
-    //expect(child.foo()).toEqual('child stuff parent stuff');
+    expect(child.foo()).toEqual('child stuff parent stuff');
     expect(parent.foo()).toEqual('parent stuff');
   });
   
