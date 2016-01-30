@@ -1,8 +1,6 @@
-
 /*
-
+TODO:
 Create full tests. do a speed test with 1000s of items, on instantiation and on method calls.
-
 */
 
 c = console; 
@@ -208,7 +206,11 @@ describe('ClassyJS', function() {
     expect(child.name).toEqual('Mickey Mouse');
   });
   
+<<<<<<< HEAD
   xit('subclass can access overriden parent method.', function() {
+=======
+  it('subclass can access overriden parent method.', function() {
+>>>>>>> b6c09e7... Tidied test
     var Parent = cls({
       __init__: function(me) {
       },
