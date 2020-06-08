@@ -22,7 +22,7 @@ It provides just one function called **cls()** which creates a class:
 
 Note the **me** parameter that is included in the above function definition, but not when calling the function.
 
-##A decent **self** keyword
+## A decent **self** keyword
  
 
 When those functions are called on the object, **me** resolves to **this** which makes it redundant in the above example, but is very useful for functions that contain nested functions. 
@@ -77,7 +77,7 @@ The only way to avoid that in Javascript would be to bind a copy of the function
 
 ClassyJs doesn't do that, it creates proptypes in the background, so you need to remember not to call functions that way (like ordinary JS).
 
-##Inheritance
+## Inheritance
     
 Inheritance and overriding are easy and intuitive. This snippet shows the full features of **cls**:
 
@@ -115,11 +115,11 @@ Inheritance and overriding are easy and intuitive. This snippet shows the full f
     angry.speak('hello');
     //>> 'Andrew yells hello'               //Calls the overriden function
 
-##How to use it
+## How to use it
 
 Just copy the source somewhere in your project, it's only 28 lines long!
 
-##What next
+## What next
 
 Clearly this is just a 28 line rant at Javascript, not a full implementation of OOP. There are no provisions for private properties (I personally underscore anything I deem private), and there is perhaps a smart way to optain that holy grail of a true reference to self.
 
